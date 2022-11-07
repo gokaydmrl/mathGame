@@ -1,4 +1,5 @@
 import ruleList from "../Rules/ruleList";
+import "../App.css";
 const Rules: () => JSX.Element = () => {
   return (
     <>

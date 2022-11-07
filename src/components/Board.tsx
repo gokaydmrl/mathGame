@@ -1,3 +1,4 @@
+import "../App.css";
 const Board = ({
   onChange,
   val,
@@ -18,7 +19,7 @@ const Board = ({
         justifyContent: "center",
         textAlign: "center",
         fontSize: "1rem",
-        margin: "-1px",
+        margin: "0.5px",
       }}
       onChange={onChange}
       placeholder="..."

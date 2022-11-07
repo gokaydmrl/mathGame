@@ -1,14 +1,9 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
 }
-
-
-
-
-
 
 input:hover {
   background-color: antiquewhite;
@@ -19,11 +14,13 @@ input:hover {
   border-radius: 10px;
   padding: 10px;
   cursor: pointer;
-  outline: none;
-  background: none;
+  /* outline: none; */
+  /* background: none; */
   border-top: 0;
   border-right: 0;
   border-left: 0;
+  margin-top: 0.5rem;
+  background-color: rgb(233, 107, 216);
 }
 .resetBtn {
   background-color: red;
@@ -31,6 +28,7 @@ input:hover {
   border-radius: 10px;
   padding: 10px;
   cursor: pointer;
+  margin-bottom: 0.5rem;
 }
 .startBtn {
   background-color: aqua;
@@ -38,4 +36,5 @@ input:hover {
   border-radius: 10px;
   padding: 10px;
   cursor: pointer;
+  margin-bottom: 0.5rem;
 }

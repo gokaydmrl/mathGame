@@ -13,8 +13,8 @@ const Board = ({
     <input
       style={{
         color: prevented.includes(n) ? "red" : "black",
-        height: "3.5rem",
-        width: "3.5rem",
+        height: "5rem",
+        width: "5rem",
         justifyContent: "center",
         textAlign: "center",
         fontSize: "1rem",

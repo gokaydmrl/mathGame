@@ -4,7 +4,8 @@ import lines from "../functions/lines";
 import calculateSum from "../functions/calculateSum";
 import calculate from "../functions/calculate";
 import Rules from "./Rules";
-
+import Form from "./Form";
+import Result from "./Result";
 export default function Game() {
   type NumInAr = number[];
   interface Stats {
@@ -13,7 +14,7 @@ export default function Game() {
     falseOnes: number;
   }
   type inputChanging = React.ChangeEvent<HTMLInputElement>;
-  //  console.log("rerender App");
+
   const [ar, setAr] = useState<number[]>(Array(9).fill(""));
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [isStarted, setIsStarted] = useState<boolean>(false);
@@ -38,21 +39,7 @@ export default function Game() {
     newAr[c] = Number(Math.floor(Math.random() * 10 + 6));
 
     setAr(newAr);
-
-    // buraaa  const firstEmptyInd = newAr.findIndex((x) => {
-    //    return x === "";
-    //  });
-    //  console.log("empty ind", firstEmptyInd);
-    //
-    //  newAr[firstEmptyInd] = Math.floor(Math.random() * 6 + 1);
-    //  setAr(newAr);
   };
-
-  // const indexes = newAr.map((num, index) => {
-  //   return { index: index, num: num };
-  // });
-
-  // console.log("indexes", indexes);
 
   const handleChange = (e: inputChanging, n: number) => {
     if (prevented.includes(n)) {
@@ -85,7 +72,6 @@ export default function Game() {
     ]);
 
     const status = calculateSum(newAr, sum);
-    //   console.log("status", status);
     setStat(status);
   };
 
@@ -102,8 +88,6 @@ export default function Game() {
       falseOnes: 0,
     });
   };
-  // console.log("stat", stat);
-  // console.log("prevented dışarda", prevented);
   return (
     <div className="App">
       <Rules />
@@ -116,42 +100,13 @@ export default function Game() {
           RESET
         </button>
       )}
-      <hr />
-      <form onSubmit={handleSubmit}>
-        <div>
-          {giveCell(0)}
-          {giveCell(1)}
-          {giveCell(2)}
-        </div>
-        <div>
-          {giveCell(3)}
-          {giveCell(4)}
-          {giveCell(5)}
-        </div>
-        <div>
-          {giveCell(6)}
-          {giveCell(7)}
-          {giveCell(8)}
-        </div>
-        <hr />
-        {isStarted && <button className="submitBtn">SUBMIT</button>}{" "}
-      </form>
-      {/* submitted &&
-        newAr.map((n, idx) => {
-          return (
-            <div key={idx}>
-              {" "}
-              {idx}: {n}{" "}
-            </div>
-          );
-        }) */}
-      {submitted && (
-        <div>
-          <p style={{ marginTop: "1rem" }}> status: {stat.status} </p>
-          <p>number of correct ones: {stat.trueOnes} </p>
-          <p>number of wrong ones: {stat.falseOnes} </p>
-        </div>
-      )}
+      <Form
+        handleSubmit={handleSubmit}
+        giveCell={giveCell}
+        isStarted={isStarted}
+      />
+
+      {submitted && <Result stat={stat} />}
     </div>
   );
 }

@@ -5,3 +5,4 @@ export interface Stats {
   falseOnes: number;
 }
 export type inputChanging = React.ChangeEvent<HTMLInputElement>;
+export type strInAr = string[]

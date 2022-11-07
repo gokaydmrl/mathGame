@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Board from "./Board";
 import lines from "../functions/lines";
 import calculateSum from "../functions/calculateSum";
@@ -6,14 +6,25 @@ import calculate from "../functions/calculate";
 import Rules from "./Rules";
 
 export default function Game() {
+  type NumInAr = number[];
+  interface Stats {
+    status: string;
+    trueOnes: number;
+    falseOnes: number;
+  }
+  type inputChanging = React.ChangeEvent<HTMLInputElement>;
   //  console.log("rerender App");
-  const [ar, setAr] = useState(Array(9).fill(""));
-  const [submitted, setSubmitted] = useState(false);
-  const [isStarted, setIsStarted] = useState(false);
-  const [prevented, setPrevented] = useState([]);
-  const [stat, setStat] = useState({});
+  const [ar, setAr] = useState<number[]>(Array(9).fill(""));
+  const [submitted, setSubmitted] = useState<boolean>(false);
+  const [isStarted, setIsStarted] = useState<boolean>(false);
+  const [prevented, setPrevented] = useState<NumInAr>([]);
+  const [stat, setStat] = useState<Stats>({
+    status: "",
+    trueOnes: 0,
+    falseOnes: 0,
+  });
   const newAr = [...ar];
-  const patterns: Array<Array<number>> = lines();
+  const patterns: Array<NumInAr> = lines();
   // console.log("lines", lines);
 
   const start = () => {
@@ -43,7 +54,7 @@ export default function Game() {
 
   // console.log("indexes", indexes);
 
-  const handleChange = (e, n) => {
+  const handleChange = (e: inputChanging, n: number) => {
     if (prevented.includes(n)) {
       return;
     } else {
@@ -52,10 +63,10 @@ export default function Game() {
     }
   };
 
-  const giveCell = (n) => {
+  const giveCell = (n: number): JSX.Element => {
     return (
       <Board
-        onChange={(e) => handleChange(e, n)}
+        onChange={(e: inputChanging) => handleChange(e, n)}
         val={newAr[n]}
         prevented={prevented}
         n={n}
@@ -63,7 +74,7 @@ export default function Game() {
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     setSubmitted(true);
@@ -85,7 +96,11 @@ export default function Game() {
     setAr(Array(9).fill(""));
     setIsStarted(false);
     setSubmitted(false);
-    setStat({});
+    setStat({
+      status: "",
+      trueOnes: 0,
+      falseOnes: 0,
+    });
   };
   // console.log("stat", stat);
   // console.log("prevented dışarda", prevented);
@@ -131,7 +146,11 @@ export default function Game() {
           );
         }) */}
       {submitted && (
-        <p style={{ marginTop: "1rem" }}> {JSON.stringify(stat)} </p>
+        <div>
+          <p style={{ marginTop: "1rem" }}> status: {stat.status} </p>
+          <p>number of correct ones: {stat.trueOnes} </p>
+          <p>number of wrong ones: {stat.falseOnes} </p>
+        </div>
       )}
     </div>
   );

@@ -1,7 +1,7 @@
 import lines from "./lines";
 import calculate from "./calculate";
 const calculateSum = (line: Array<number>, sum: number) => {
-  const patterns = lines();
+  const patterns: number[][] = lines();
   let quals = {
     status: "",
     trueOnes: 0,
@@ -18,14 +18,14 @@ const calculateSum = (line: Array<number>, sum: number) => {
 
     const newArray = [line[a], line[b], line[c]];
     if (calculate(newArray) === sum) {
-      console.log(`sıra ${patterns[x]} başarılı`);
+      console.log(`line ${patterns[x]} is correct`);
       quals.trueOnes++;
       if (quals.trueOnes === 8) {
-        quals.status = "hepsi doğru";
+        quals.status = "all of them are true";
       }
     } else {
-      console.log("nö");
-      quals.status = "yanlışlar var";
+      console.log("no");
+      quals.status = "some of them are wrong";
       quals.falseOnes++;
     }
   }

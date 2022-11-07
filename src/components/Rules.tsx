@@ -1,5 +1,5 @@
 import ruleList from "../Rules/ruleList";
-const Rules = () => {
+const Rules: () => JSX.Element = () => {
   return (
     <>
       <h3>homeWork</h3>{" "}

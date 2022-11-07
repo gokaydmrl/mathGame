@@ -1,4 +1,14 @@
-const Board = ({ onChange, val, prevented, n }) => {
+const Board = ({
+  onChange,
+  val,
+  prevented,
+  n,
+}: {
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  val: number;
+  prevented: number[];
+  n: number;
+}) => {
   return (
     <input
       style={{

@@ -6,15 +6,10 @@ import calculate from "../functions/calculate";
 import Rules from "./Rules";
 import Form from "./Form";
 import Result from "./Result";
-export default function Game() {
-  type NumInAr = number[];
-  interface Stats {
-    status: string;
-    trueOnes: number;
-    falseOnes: number;
-  }
-  type inputChanging = React.ChangeEvent<HTMLInputElement>;
+import Buttons from "./Buttons";
+import { NumInAr, Stats, inputChanging } from "../types";
 
+export default function Game() {
   const [ar, setAr] = useState<number[]>(Array(9).fill(""));
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [isStarted, setIsStarted] = useState<boolean>(false);
@@ -63,21 +58,16 @@ export default function Game() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     setSubmitted(true);
     const sum = calculate([
       newAr[prevented[0]],
       newAr[prevented[1]],
       newAr[prevented[2]],
     ]);
-
     const status = calculateSum(newAr, sum);
     setStat(status);
   };
 
-  //
-
-  //
   const reset = () => {
     setAr(Array(9).fill(""));
     setIsStarted(false);
@@ -91,21 +81,12 @@ export default function Game() {
   return (
     <div className="App">
       <Rules />
-      {isStarted === false ? (
-        <button className="startBtn" onClick={start}>
-          START
-        </button>
-      ) : (
-        <button className="resetBtn" onClick={reset}>
-          RESET
-        </button>
-      )}
+      <Buttons isStarted={isStarted} start={start} reset={reset} />
       <Form
         handleSubmit={handleSubmit}
         giveCell={giveCell}
         isStarted={isStarted}
       />
-
       {submitted && <Result stat={stat} />}
     </div>
   );

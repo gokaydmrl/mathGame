@@ -29,9 +29,9 @@ export default function Game() {
     console.log("a", a, "b", b, "c", c);
     setPrevented([a, b, c]);
 
-    newAr[a] = Number(Math.floor(Math.random() * 10 + 2));
+    newAr[a] = Number(Math.floor(Math.random() * 10 + 3));
     newAr[b] = Number(Math.floor(Math.random() * 10 + 4));
-    newAr[c] = Number(Math.floor(Math.random() * 10 + 6));
+    newAr[c] = Number(Math.floor(Math.random() * 10 + 5));
 
     setAr(newAr);
   };
